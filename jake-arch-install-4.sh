@@ -1,10 +1,13 @@
-sudo pacman -Syu --needed zsh
+sudo pacman -Syu --needed less zsh
 chsh -s /bin/zsh
 
-sudo pacman -Syu --needed firefox hyprland kitty waybar wl-clipboard wofi
+sudo pacman -Syu --needed firefox hyprland hyprpaper kitty swaybg waybar wl-clipboard wofi
 yay google-chrome
 
-sudo pacman -Syu --needed awesome-terminal-fonts nerd-fonts noto-fonts-emoji powerline-fonts
+sudo pacman -Syu --needed awesome-terminal-fonts nerd-fonts noto-fonts-emoji otf-monaspace-nerd powerline-fonts
+
+sudo pacman -Syu pipewire-audio pipewire-alsa pipewire-pulse alsa-utils wireplumber pavucontrol
+
 
 sudo pacman -Syu --needed openssh magic-wormhole
 ssh_key = "$(whoami)@$(uname -n)-$(date -I)"
@@ -15,10 +18,12 @@ wormhole send ~/.ssh/id_ed25519.pub
 
 sudo pacman -Syu --needed libyaml
 yay asdf-vm
-echo ". /opt/asdf-vm/asdf.sh" >> ~/.zshrc
 asdf plugin add ruby https://github.com/asdf-vm/asdf-ruby.git
 asdf install ruby latest
 asdf global ruby latest
+asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git
+asdf install nodejs latest
+asdf global nodejs latest
 
 sudo pacman -Syu wget
 cd /tmp
@@ -37,3 +42,12 @@ homesick link dotfiles
 mkdir -p ~/.vim/bundle
 git clone git@github.com:VundleVim/Vundle.vim ~/.vim/bundle/Vundle.vim
 
+sudo pacman -Syu --needed interception-caps2esc
+sudo cp ~/.homesick/repos/dotfiles/caps2esc/udevdemon.yaml /etc/interception/
+systemctl enable --now udevmon
+
+git clone -b feature/shadow git@github.com:ksqsf/emacsmoe.git /tmp/emacs-moe
+sudo pacman -S libxpm
+cd /tmp/emacs-moe
+sudo make install
+git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
