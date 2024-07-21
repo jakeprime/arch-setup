@@ -39,23 +39,16 @@ mount /dev/$disk_name$os_p /mnt
 mount --mkdir /dev/$disk_name$boot_p /mnt/boot
 swapon /dev/$disk_name$swap_p
 
-read -p "Mount USB? (Yn): " confirm_usb
-if [[ confirm_usb == [Yy] || -z $confirm_usb ]]
-then
-	read -p "USB partition? ($default_usb_p): " usb_p
-	if [[ -z $usb_p ]]; then usb_p=$default_usb_p; fi
-	mount --mkdir /dev/$usb_p /mnt/usb
-fi
-
 # install linux!
 echo "Installing linux!..."
-pacstrap -K /mnt base linux linux-firmware linux-headers broadcom-wl-dkms intel-ucode iwd networkmanager sudo vim
+pacstrap -K /mnt base linux linux-firmware linux-headers intel-ucode iwd networkmanager sudo vim
 
-# remount the usb as it contains this script
-if [[ confirm_usb == [Yy] || -z $confirm_usb ]]
-then
-	cp /mnt/usb/jake/*.sh /mnt/usr/local/sbin/
-fi
+# copy the installer scripts onto new installation drive
+default_usb_p="sda2"
+read -p "USB partition? ($default_usb_p): " usb_p
+if [[ -z $usb_p ]]; then usb_p=$default_usb_p; fi
+mount --mkdir /dev/$usb_p /mnt/usb
+cp /mnt/usb/jake* /mnt/usr/local/sbin/
 
 # enter the filesystem
 read -p "Confirm fstab is correct. Press any key..."
@@ -63,6 +56,6 @@ genfstab -U /mnt >> /mnt/etc/fstab
 vim /mnt/etc/fstab
 
 echo "Now chroot-ing into the installed operating system."
-echo "Once there run /usr/local/sbin/jake-configure.sh to continue."
+echo "Once there run jake-arch-install-2.sh to continue."
 read -p "Press any key..."
 arch-chroot /mnt

@@ -8,7 +8,8 @@ then
 	read -p "WiFi password: " wifi_password
 	echo "Connecting to $ssid..."
 	systemctl --now enable NetworkManager
-	nmcli device wifi connect "$ssid" password "$wifi_pasword"
+	sleep 5
+	nmcli device wifi connect "$ssid" password "$wifi_password"
 fi
 
 pacman -Syu --needed base-devel git man-db man-pages sudo vim which
@@ -24,13 +25,10 @@ then
 	printf "Press any key to edit the sudoers file and add the following:\n\n$user_name ALL=(ALL:ALL) ALL\n"
 	read -p "..."
 	EDITOR=vim visudo
+	echo "About to login as $user_name. Time for the full final set of packages to be installed."
+	read -p "Press any key to continue, and let jake-arch-install-4.sh make the dream a reality."
 	su "$user_name";
 fi
-
-echo "Installing yay..."
-git clone https://aur.archlinux.org/yay.git /tmp/yay
-cd /tmp/yay
-makepkg -si
 
 
 
