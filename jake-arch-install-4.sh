@@ -2,7 +2,7 @@ sudo pacman -Syu --needed less zsh
 chsh -s /bin/zsh
 
 sudo pacman -Syu --needed firefox hyprland hyprpaper kitty swaybg waybar wl-clipboard wofi
-yay google-chrome
+yay google-chrome gotop
 
 sudo pacman -Syu --needed awesome-terminal-fonts nerd-fonts noto-fonts-emoji otf-monaspace-nerd powerline-fonts
 
@@ -51,3 +51,5 @@ sudo pacman -S libxpm
 cd /tmp/emacs-moe
 sudo make install
 git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
+
+# fin
