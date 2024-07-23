@@ -30,11 +30,7 @@ asdf install nodejs latest
 asdf global nodejs latest
 
 sudo pacman -Syu wget
-cd /tmp
-wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh
-chmod a+x /tmp/install.sh
-/tmp/install.sh
-cd ~
+ZSH="$HOME/.oh-my-zsh" sh -c "$(wget https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)"
 rm ~/.zshrc # we'll homesick in our own config
 
 gem install homesick
