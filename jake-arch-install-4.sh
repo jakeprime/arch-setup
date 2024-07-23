@@ -2,7 +2,11 @@ sudo pacman -Syu --needed less zsh
 chsh -s /bin/zsh
 
 sudo pacman -Syu --needed firefox hyprland hyprpaper kitty swaybg waybar wl-clipboard wofi
-yay google-chrome gotop
+yay google-chrome gotop light
+
+sudo chgrp -R video /sys/class/backlight/intel_backlight .
+sudo chmod g+w /sys/class/backglight/intel_backlight/brightness
+sudo usermod -a -G video jake
 
 sudo pacman -Syu --needed awesome-terminal-fonts nerd-fonts noto-fonts-emoji otf-monaspace-nerd powerline-fonts
 
