@@ -1,5 +1,5 @@
-sudo pacman -Syu --needed less zsh
-chsh -s /bin/zsh
+sudo pacman -Syu --needed git-delta less zsh
+chsh -s `which zsh`
 
 sudo pacman -Syu --needed firefox hyprland hyprpaper kitty swaybg waybar wl-clipboard wofi
 yay google-chrome gotop light
@@ -29,6 +29,7 @@ asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git
 asdf install nodejs latest
 asdf global nodejs latest
 
+sudo pacman -S zsh-autosuggestions
 sudo pacman -Syu wget
 ZSH="$HOME/.oh-my-zsh" sh -c "$(wget https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)"
 rm ~/.zshrc # we'll homesick in our own config
