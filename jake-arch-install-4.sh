@@ -1,7 +1,7 @@
 sudo pacman -Syu --needed git-delta less zsh
 chsh -s `which zsh`
 
-sudo pacman -Syu --needed firefox hyprland hyprpaper kitty swaybg waybar wl-clipboard wofi
+sudo pacman -Syu --needed firefox grim hyprland hyprpaper kitty slurp swaybg waybar wl-clipboard wofi
 yay google-chrome gotop light
 
 sudo chgrp -R video /sys/class/backlight/intel_backlight .
