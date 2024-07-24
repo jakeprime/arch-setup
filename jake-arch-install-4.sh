@@ -1,4 +1,4 @@
-sudo pacman -Syu --needed git-delta less zsh
+sudo pacman -Syu --needed git-delta less libgccjit zsh
 chsh -s `which zsh`
 
 sudo pacman -Syu --needed firefox grim hyprland hyprpaper kitty slurp swaybg waybar wl-clipboard wofi
@@ -50,6 +50,8 @@ systemctl enable --now udevmon
 git clone -b feature/shadow git@github.com:ksqsf/emacsmoe.git /tmp/emacs-moe
 sudo pacman -S libxpm
 cd /tmp/emacs-moe
+./autogen.sh
+./configure --with-native-compilation --with-json --with-pgtk
 sudo make install
 git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
 
