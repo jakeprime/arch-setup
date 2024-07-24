@@ -56,4 +56,8 @@ cd /tmp/emacs-moe
 sudo make install
 git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
 
+sudo pacman -S fuse3 rclone
+rclone config
+mkdir /jake/home/gdrive
+
 # fin
