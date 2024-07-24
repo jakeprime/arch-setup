@@ -1,8 +1,9 @@
 sudo pacman -Syu --needed git-delta less libgccjit zsh
 chsh -s `which zsh`
 
-sudo pacman -Syu --needed firefox grim hyprland hyprpaper kitty slurp swaybg waybar wl-clipboard wofi
-yay google-chrome gotop light
+sudo pacman -S tesseract-eng
+sudo pacman -Syu --needed dolphin firefox grim hyprland hyprpaper kitty mupdf slurp swaybg waybar wl-clipboard wofi
+yay 1password google-chrome gotop light slack-desktop
 
 sudo chgrp -R video /sys/class/backlight/intel_backlight .
 sudo chmod g+w /sys/class/backglight/intel_backlight/brightness
