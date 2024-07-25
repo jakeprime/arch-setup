@@ -2,7 +2,7 @@ sudo pacman -Syu --needed git-delta less libgccjit zsh
 chsh -s `which zsh`
 
 sudo pacman -S tesseract-eng
-sudo pacman -Syu --needed dolphin firefox grim hyprland hyprpaper kitty mupdf slurp swaybg waybar wl-clipboard wofi
+sudo pacman -Syu --needed dolphin firefox grim hyprland hyprpaper kitty libnotify mako mupdf slurp swaybg waybar wl-clipboard wofi
 yay 1password google-chrome gotop light slack-desktop
 
 sudo chgrp -R video /sys/class/backlight/intel_backlight .
