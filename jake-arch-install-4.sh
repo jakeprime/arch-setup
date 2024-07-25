@@ -13,6 +13,11 @@ sudo pacman -Syu --needed awesome-terminal-fonts nerd-fonts noto-fonts-emoji otf
 
 sudo pacman -Syu alsa-utils pavucontrol pipewire-alsa pipewire-audio pipewire-pulse wireplumber
 
+sudo pacman -S spotify-launcher
+echo "Uncomment the wayland args in the Spotify config..."
+read -p
+sudo vim /etc/spotify-launcher.conf
+
 
 sudo pacman -Syu --needed openssh magic-wormhole
 ssh_key = "$(whoami)@$(uname -n)-$(date -I)"
