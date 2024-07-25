@@ -11,7 +11,7 @@ sudo usermod -a -G video jake
 
 sudo pacman -Syu --needed awesome-terminal-fonts nerd-fonts noto-fonts-emoji otf-monaspace-nerd powerline-fonts
 
-sudo pacman -Syu pipewire-audio pipewire-alsa pipewire-pulse alsa-utils wireplumber pavucontrol
+sudo pacman -Syu alsa-utils pavucontrol pipewire-alsa pipewire-audio pipewire-pulse wireplumber
 
 
 sudo pacman -Syu --needed openssh magic-wormhole

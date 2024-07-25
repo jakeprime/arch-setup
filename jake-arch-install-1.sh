@@ -41,7 +41,7 @@ swapon /dev/$disk_name$swap_p
 
 # install linux!
 echo "Installing linux!..."
-pacstrap -K /mnt base linux linux-firmware linux-headers intel-ucode iwd networkmanager sudo vim
+pacstrap -K /mnt base linux linux-firmware linux-headers intel-ucode iwd networkmanager sof-firmware sudo vim
 
 # copy the installer scripts onto new installation drive
 default_usb_p="sda2"
