@@ -35,6 +35,8 @@ asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git
 asdf install nodejs latest
 asdf global nodejs latest
 
+gem install rails rubocop rubocop-rails ruby-lsp
+
 sudo pacman -S zsh-autosuggestions
 sudo pacman -Syu wget
 ZSH="$HOME/.oh-my-zsh" sh -c "$(wget https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)"
