@@ -1,4 +1,4 @@
-sudo pacman -Syu --needed cmake git-delta less libgccjit zsh
+sudo pacman -Syu --needed cmake git-delta less libgccjit postgresql zsh
 chsh -s `which zsh`
 
 sudo pacman -S tesseract-eng
