@@ -12,7 +12,7 @@ then
 	nmcli device wifi connect "$ssid" password "$wifi_password"
 fi
 
-pacman -Syu --needed base-devel git man-db man-pages sudo vim which
+pacman -S --needed base-devel git man-db man-pages sudo vim which
 
 read -p "Create user? (Y/n): " confirm_user
 if [[ $confirm_user == [Yy] || -z "$confirm_user" ]];
