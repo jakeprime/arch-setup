@@ -43,9 +43,9 @@ pip install dbus-python PyGObject
 gem install rails rubocop rubocop-rails ruby-lsp
 node install --yarn
 
-sudo pacman -S zsh-autosuggestions
 sudo pacman -S wget
 ZSH="$HOME/.oh-my-zsh" sh -c "$(wget https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)"
+git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 rm ~/.zshrc # we'll homesick in our own config
 
 gem install homesick
