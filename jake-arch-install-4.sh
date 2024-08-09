@@ -69,8 +69,25 @@ cd /tmp/emacs-moe
 sudo make install
 git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
 
-sudo pacman -S fuse3 rclone
-rclone config
-mkdir /jake/home/gdrive
+
+sudo pacman -S fuse3 inotify-tools rclone
+read -p "Setup Google Drive sync? (Y/n): " gdrive_sync
+if [[ $gdrive_sync == [Yy] || -z "$gdrive_sync" ]];
+then
+    read -p "Visit https://console.cloud.google.com/apis/api/drive.googleapis.com/credentials?project=g-drive-share-411112 to get the credentials.\nPress any key to continue"
+    rclone config
+    mkdir /jake/home/gdrive
+    echo "Syncing with dry run..."
+    rclone bisync gdrive: /home/jake/gdrive --create-empty-src-dirs --compare size,modtime,checksum --slow-hash-sync-only --resilient -MvP --drive-skip-gdocs --fix-case --resync --dry-run
+    read -p "Sync for real? (Y/n): " sync_for_real
+    if [[ $sync_for_real == [Yy] || -z "$sync_for_real" ]];
+    then
+        rclone bisync gdrive: /home/jake/gdrive --create-empty-src-dirs --compare size,modtime,checksum --slow-hash-sync-only --resilient -MvP --drive-skip-gdocs --fix-case --resync --dry-run
+
+        sudo loginctl enable-linger jake
+        sudo cp /home/jake/.homesick/repos/dotfiles/scripts/gdrive-sync.sh /usr/local/sbin
+        gdrive-sync.sh
+    fi
+fi
 
 # fin
