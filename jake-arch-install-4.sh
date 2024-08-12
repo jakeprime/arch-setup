@@ -1,8 +1,8 @@
-sudo pacman -S cmake git-delta less libgccjit postgresql ripgrep zsh
+sudo pacman -S cmake git-delta jq less libgccjit postgresql ripgrep zsh
 chsh -s `which zsh`
 
 sudo pacman -S tesseract-eng
-sudo pacman -S dolphin firefox grim hyprland hyprpaper kitty libnotify mako mupdf nwg-look slurp swaybg waybar wl-clipboard wofi
+sudo pacman -S dolphin firefox fprintd grim hyprland hyprpaper imagemagick isync kitty libnotify mako mupdf nwg-look slurp swaybg usbutils waybar wl-clipboard wofi
 yay 1password google-chrome gotop heroku-cli light slack-desktop smile
 
 sudo chgrp -R video /sys/class/backlight/intel_backlight .
@@ -38,10 +38,12 @@ asdf global nodejs latest
 asdf plugin add python
 asdf install python latest
 asdf global python latest
-pip install dbus-python PyGObject
+pip install build dbus-python hatchling installer PyGObject
 
 gem install rails rubocop rubocop-rails ruby-lsp
 node install --yarn
+
+yay pyprpaper
 
 sudo pacman -S wget
 ZSH="$HOME/.oh-my-zsh" sh -c "$(wget https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)"
@@ -68,6 +70,7 @@ cd /tmp/emacs-moe
 ./configure --with-native-compilation --with-json --with-pgtk
 sudo make install
 git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
+yay mu4e
 
 
 sudo pacman -S fuse3 inotify-tools rclone
@@ -89,5 +92,23 @@ then
         gdrive-sync.sh
     fi
 fi
+
+# emails
+sudo pacman -S pass
+# then something like
+#    gpg --full-generate-key
+# get the uid from:
+#    gpg -k
+# initialise password manager
+#    pass init [uid from above]
+#    pass insert imap/jake.prime@gmail.com
+#    sudo ln sudo ln -s /usr/share/emacs/site-lisp/mu4e /usr/bin/mu4e
+#    mkdir ~/.mail
+#    mkdir ~/.mail/personal
+#    mkdir ~/.mail/cleo
+#    mu init --maildir=~/.mail --my-address=jake@jakeprime.com --my-address=jake@meetcleo.com --my-address=jake.prime@gmail.com
+# this will take a while!
+#    mu index
+
 
 # fin
