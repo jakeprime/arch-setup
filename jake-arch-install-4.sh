@@ -81,14 +81,13 @@ then
     rclone config
     mkdir /jake/home/gdrive
     echo "Syncing with dry run..."
-    rclone bisync gdrive: /home/jake/gdrive --create-empty-src-dirs --compare size,modtime,checksum --slow-hash-sync-only --resilient -MvP --drive-skip-gdocs --fix-case --resync --dry-run
+    rclone bisync gdrive: /home/jake/gdrive --create-empty-src-dirs --compare size,modtime,checksum --slow-hash-sync-only --resilient -MvP --drive-export-formats link.html --fix-case --resync --dry-run
     read -p "Sync for real? (Y/n): " sync_for_real
     if [[ $sync_for_real == [Yy] || -z "$sync_for_real" ]];
     then
-        rclone bisync gdrive: /home/jake/gdrive --create-empty-src-dirs --compare size,modtime,checksum --slow-hash-sync-only --resilient -MvP --drive-skip-gdocs --fix-case --resync --dry-run
-
+        rclone bisync gdrive: /home/jake/gdrive --create-empty-src-dirs --compare size,modtime,checksum --slow-hash-sync-only --resilient -MvP --drive-export-formats link.html --fix-case --resync
         sudo loginctl enable-linger jake
-        sudo cp /home/jake/.homesick/repos/dotfiles/scripts/gdrive-sync.sh /usr/local/sbin
+        sudo ln -s /home/jake/.homesick/repos/dotfiles/scripts/gdrive-sync.sh /usr/local/sbin
         gdrive-sync.sh
     fi
 fi
