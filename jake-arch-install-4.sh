@@ -3,7 +3,7 @@ chsh -s `which zsh`
 
 sudo pacman -S tesseract-eng
 sudo pacman -S dolphin firefox fprintd grim hyprland hyprpaper imagemagick isync kitty libnotify mako mupdf nwg-look slurp swaybg usbutils waybar wl-clipboard wofi
-yay 1password google-chrome gotop heroku-cli light slack-desktop smile
+yay 1password google-chrome gotop heroku-cli light slack-desktop-wayland smile
 
 sudo chgrp -R video /sys/class/backlight/intel_backlight .
 sudo chmod g+w /sys/class/backglight/intel_backlight/brightness
