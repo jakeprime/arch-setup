@@ -2,8 +2,8 @@ sudo pacman -S cmake git-delta jq less libgccjit postgresql ripgrep zsh
 chsh -s `which zsh`
 
 sudo pacman -S tesseract-eng
-sudo pacman -S cliphist dolphin firefox fprintd grim hyprland hyprpaper imagemagick isync kitty libnotify mako mupdf nwg-look slurp swaybg usbutils waybar wl-clipboard wofi
-yay 1password google-chrome gotop heroku-cli light slack-desktop-wayland smile
+sudo pacman -S cliphist docker dolphin firefox fprintd grim hyprland hyprpaper imagemagick isync kitty libnotify mako mupdf nwg-look slurp swaybg usbutils waybar wl-clipboard wofi
+yay 1password 1password-cli google-chrome gotop heroku-cli light slack-desktop-wayland smile
 
 sudo chgrp -R video /sys/class/backlight/intel_backlight .
 sudo chmod g+w /sys/class/backglight/intel_backlight/brightness
@@ -39,9 +39,16 @@ asdf plugin add python
 asdf install python latest
 asdf global python latest
 pip install build dbus-python hatchling installer PyGObject
+# there must be a better way to do this, all the following were needed to be able to install the aws-cli
+pip install flit-core pep517 python-dateutil distro urllib3 awscrt ruamel.yaml colorama docutils prompt_toolkit cryptography
 
 gem install rails rubocop rubocop-rails ruby-lsp
 node install --yarn
+
+yay aws-cli-v2
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+(echo; echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"') >> /home/jake/.zshrc
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
 yay pyprpaper
 
@@ -108,6 +115,17 @@ sudo pacman -S pass
 #    mu init --maildir=~/.mail --my-address=jake@jakeprime.com --my-address=jake@meetcleo.com --my-address=jake.prime@gmail.com
 # this will take a while!
 #    mu index
+
+# add github homebrew token with "repo" premissions
+# https://github.com/settings/tokens/new
+# and add it to the password store
+# pass insert github/homebrew
+
+brew tap meetcleo/cleo
+brew install meetcleo/cleo/cleo
+
+yay awsvpnclient
+sudo systemctl enable --now awsvpnclient
 
 
 # fin
