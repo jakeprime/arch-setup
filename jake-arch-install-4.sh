@@ -63,6 +63,11 @@ cd ~/.homesick/repos/dotfiles
 git checkout homesick
 homesick link dotfiles
 
+# ridiculuous fix for suspend issue
+# https://github.com/systemd/systemd/issues/33083#issuecomment-2142473011
+sudo mkdir /etc/systemd/system/systemd-suspend.service.d
+sudo cp ~/.homesick/repos/dotfiles/files /etc/systemd/system/systemd-suspend.service.d
+
 mkdir -p ~/.vim/bundle
 git clone git@github.com:VundleVim/Vundle.vim ~/.vim/bundle/Vundle.vim
 
