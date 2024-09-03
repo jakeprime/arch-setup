@@ -66,10 +66,6 @@ homesick link dotfiles
 mkdir -p ~/.vim/bundle
 git clone git@github.com:VundleVim/Vundle.vim ~/.vim/bundle/Vundle.vim
 
-sudo pacman -S interception-caps2esc
-sudo cp ~/.homesick/repos/dotfiles/caps2esc/udevdemon.yaml /etc/interception/
-systemctl enable --now udevmon
-
 git clone -b feature/shadow git@github.com:ksqsf/emacsmoe.git /tmp/emacs-moe
 sudo pacman -S libxpm
 cd /tmp/emacs-moe
