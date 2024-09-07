@@ -8,7 +8,7 @@ sudo chgrp -R video /sys/class/backlight/intel_backlight .
 sudo chmod g+w /sys/class/backglight/intel_backlight/brightness
 sudo usermod -a -G video jake
 
-sudo pacman -S awesome-terminal-fonts nerd-fonts noto-fonts-emoji otf-monaspace-nerd powerline-fonts
+sudo pacman -S awesome-terminal-fonts nerd-fonts noto-fonts noto-fonts-emoji otf-monaspace-nerd powerline-fonts
 
 sudo pacman -S alsa-utils pavucontrol pipewire-alsa pipewire-audio pipewire-pulse pipewire-zeroconf wireplumber
 systemctl enable --now avahi-daemon
