@@ -1,7 +1,6 @@
 sudo pacman -S cmake git-delta jq less libgccjit postgresql ripgrep zsh
 chsh -s `which zsh`
 
-sudo pacman -S tesseract-eng
 sudo pacman -S cliphist docker dolphin firefox fprintd fwupd grim hyprland hyprpaper imagemagick isync kitty libnotify mako mupdf nwg-look slurp swaybg usbutils waybar wl-clipboard wofi
 yay 1password 1password-cli google-chrome gotop heroku-cli light slack-desktop-wayland smile
 
