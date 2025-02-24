@@ -101,17 +101,12 @@ then
 fi
 
 sudo pacman -S pass
-# then something like
-#    gpg --full-generate-key
-# get the uid from:
-#    gpg -k
-# initialise password manager
-#    pass init [uid from above]
-
-# add github homebrew token with "repo" premissions
-# https://github.com/settings/tokens/new
-# and add it to the password store
-# pass insert github/homebrew
+read -p "Generating GPG key, default options are fine for all.\nPress any key to continue"
+gpg --full-generate-key
+read -p "Past the long public key from above here: " gpg_key
+pass init $gpg_key
+read -p "Get a key from https://github.com/settings/tokens/new\nI've got it..."
+pass insert github/homebrew
 
 brew tap meetcleo/cleo
 brew install meetcleo/cleo/cleo
