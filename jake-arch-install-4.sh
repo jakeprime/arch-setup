@@ -1,17 +1,24 @@
 sudo pacman -S cmake git-delta jq less libgccjit postgresql ripgrep zsh
 chsh -s `which zsh`
 
-sudo pacman -S cliphist docker dolphin firefox fprintd fwupd grim hyprland hyprpaper imagemagick isync kitty libnotify mako mupdf nwg-look slurp swaybg usbutils waybar wl-clipboard wofi
-yay 1password 1password-cli google-chrome gotop heroku-cli light slack-desktop-wayland smile
+# install 4dots hyprland
+# do this early as it installs a bunch of OS functionality and there is less chance of
+# conflicts if the package landscape is still clean
+bash <(curl -s "https://end-4.github.io/dots-hyprland-wiki/setup.sh")
 
-sudo chgrp -R video /sys/class/backlight/intel_backlight .
-sudo chmod g+w /sys/class/backglight/intel_backlight/brightness
-sudo usermod -a -G video jake
+sudo pacman -S docker firefox fprintd fwupd imagemagick isync libnotify nwg-look usbutils wl-clipboard
+yay 1password 1password-cli google-chrome gotop heroku-cli light slack-desktop-wayland
+
+# probably don't need this if using 4dots but will find out on next clean install
+# sudo chgrp -R video /sys/class/backlight/intel_backlight .
+# sudo chmod g+w /sys/class/backglight/intel_backlight/brightness
+# sudo usermod -a -G video jake
 
 sudo pacman -S awesome-terminal-fonts nerd-fonts noto-fonts noto-fonts-emoji otf-monaspace-nerd powerline-fonts
 
-sudo pacman -S alsa-utils pavucontrol pipewire-alsa pipewire-audio pipewire-pulse pipewire-zeroconf wireplumber
-systemctl enable --now avahi-daemon
+# same as backlight comment above
+# sudo pacman -S alsa-utils pavucontrol pipewire-alsa pipewire-audio pipewire-pulse pipewire-zeroconf wireplumber
+# systemctl enable --now avahi-daemon
 
 sudo pacman -S spotify-launcher
 echo "Uncomment the wayland args in the Spotify config..."
@@ -72,7 +79,6 @@ cd /tmp/emacs-moe
 ./configure --with-native-compilation --with-json --with-pgtk
 sudo make install
 git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
-yay mu4e
 
 
 sudo pacman -S fuse3 inotify-tools rclone
