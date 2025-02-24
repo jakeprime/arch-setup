@@ -37,13 +37,13 @@ sudo pacman -S libyaml python-pip
 yay asdf-vm
 asdf plugin add ruby https://github.com/asdf-vm/asdf-ruby.git
 asdf install ruby latest
-asdf global ruby latest
+asdf set -u ruby latest
 asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git
 asdf install nodejs latest
-asdf global nodejs latest
+asdf set -u nodejs latest
 asdf plugin add python
 asdf install python latest
-asdf global python latest
+asdf set -u python latest
 pip install build dbus-python hatchling installer PyGObject
 # there must be a better way to do this, all the following were needed to be able to install the aws-cli
 pip install flit-core pep517 python-dateutil distro urllib3 awscrt ruamel.yaml colorama docutils prompt_toolkit cryptography
