@@ -110,6 +110,7 @@ pass insert github/homebrew
 
 brew tap meetcleo/cleo
 brew install meetcleo/cleo/cleo
+cleo config tunnel port 3064
 
 yay awsvpnclient
 sudo systemctl enable --now awsvpnclient
