@@ -100,7 +100,6 @@ then
     fi
 fi
 
-# emails
 sudo pacman -S pass
 # then something like
 #    gpg --full-generate-key
@@ -108,14 +107,6 @@ sudo pacman -S pass
 #    gpg -k
 # initialise password manager
 #    pass init [uid from above]
-#    pass insert imap/jake.prime@gmail.com
-#    sudo ln sudo ln -s /usr/share/emacs/site-lisp/mu4e /usr/bin/mu4e
-#    mkdir ~/.mail
-#    mkdir ~/.mail/personal
-#    mkdir ~/.mail/cleo
-#    mu init --maildir=~/.mail --my-address=jake@jakeprime.com --my-address=jake@meetcleo.com --my-address=jake.prime@gmail.com
-# this will take a while!
-#    mu index
 
 # add github homebrew token with "repo" premissions
 # https://github.com/settings/tokens/new
