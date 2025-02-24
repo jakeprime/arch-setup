@@ -64,10 +64,9 @@ git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-m
 rm ~/.zshrc # we'll homesick in our own config
 
 gem install homesick
-homesick clone git@github.com:jakeprime/dotfiles
-cd ~/.homesick/repos/dotfiles
-git checkout homesick
-homesick link dotfiles
+homesick clone git@github.com:jakeprime/dotfiles arch
+cd ~/.homesick/repos/arch
+homesick link arch
 
 mkdir -p ~/.vim/bundle
 git clone git@github.com:VundleVim/Vundle.vim ~/.vim/bundle/Vundle.vim
