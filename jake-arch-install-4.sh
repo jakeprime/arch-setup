@@ -1,3 +1,6 @@
+# do this first to make sure we have up to date mirrors
+sudo pacman -Syu
+
 sudo pacman -S cmake git-delta jq less libgccjit postgresql ripgrep zsh
 chsh -s `which zsh`
 
@@ -5,6 +8,15 @@ chsh -s `which zsh`
 # do this early as it installs a bunch of OS functionality and there is less chance of
 # conflicts if the package landscape is still clean
 bash <(curl -s "https://end-4.github.io/dots-hyprland-wiki/setup.sh")
+
+yay -R hyprswitch --noconfirm
+mkdir /home/jake/work
+mkdir /home/jake/work/personal
+git clone git@github.com:jakeprime/hyprswitch /home/jake/work/personal/hyprswitch
+cd /home/jake/work/personal/hyprswitch
+cargo b -r
+sudo cp target/release/hyprswitch /usr/bin
+popd
 
 sudo pacman -S docker firefox fprintd fwupd imagemagick isync libnotify nwg-look usbutils wl-clipboard
 yay 1password 1password-cli google-chrome gotop heroku-cli light slack-desktop-wayland
