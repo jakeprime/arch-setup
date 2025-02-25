@@ -19,7 +19,7 @@ sudo cp target/release/hyprswitch /usr/bin
 popd
 
 sudo pacman -S docker firefox fprintd fwupd imagemagick isync libnotify nwg-look usbutils wl-clipboard
-yay -S 1password 1password-cli google-chrome gotop heroku-cli light slack-desktop-wayland
+yay -S 1password 1password-cli google-chrome gotop light slack-desktop-wayland
 
 # probably don't need this if using 4dots but will find out on next clean install
 # sudo chgrp -R video /sys/class/backlight/intel_backlight .
@@ -62,6 +62,10 @@ pip install flit-core pep517 python-dateutil distro urllib3 awscrt ruamel.yaml c
 
 gem install rails rubocop rubocop-rails ruby-lsp
 node install --yarn
+
+# need 20.x for heroku-cli
+asdf install nodejs 20.18.3
+ASDF_NODEJS_VERSION=20.18.3 yay heroku-cli
 
 yay aws-cli-v2
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
