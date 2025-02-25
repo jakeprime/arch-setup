@@ -19,7 +19,7 @@ sudo cp target/release/hyprswitch /usr/bin
 popd
 
 sudo pacman -S docker firefox fprintd fwupd imagemagick isync libnotify nwg-look usbutils wl-clipboard
-yay 1password 1password-cli google-chrome gotop heroku-cli light slack-desktop-wayland
+yay -S 1password 1password-cli google-chrome gotop heroku-cli light slack-desktop-wayland
 
 # probably don't need this if using 4dots but will find out on next clean install
 # sudo chgrp -R video /sys/class/backlight/intel_backlight .
