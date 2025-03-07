@@ -58,7 +58,7 @@ pip install build dbus-python hatchling installer PyGObject
 # there must be a better way to do this, all the following were needed to be able to install the aws-cli
 pip install flit-core pep517 python-dateutil distro urllib3 awscrt ruamel.yaml colorama docutils prompt_toolkit cryptography
 
-gem install rails rubocop rubocop-rails ruby-lsp
+gem install rails rubocop rubocop-rails ruby-lsp sorbet
 node install --yarn
 
 # need 20.x for heroku-cli
