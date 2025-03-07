@@ -18,7 +18,7 @@ cargo b -r
 sudo cp target/release/hyprswitch /usr/bin
 popd
 
-sudo pacman -S docker firefox fprintd fwupd imagemagick isync libnotify nwg-look usbutils wl-clipboard
+sudo pacman -S fprintd fwupd htop imagemagick isync libnotify nwg-look usbutils wl-clipboard
 yay -S 1password 1password-cli google-chrome gotop light slack-desktop-wayland
 
 # probably don't need this if using 4dots but will find out on next clean install
