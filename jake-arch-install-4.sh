@@ -21,16 +21,14 @@ popd
 sudo pacman -S fprintd fwupd htop imagemagick isync libnotify nwg-look usbutils wl-clipboard
 yay -S 1password 1password-cli google-chrome gotop light slack-desktop-wayland
 
-# probably don't need this if using 4dots but will find out on next clean install
-# sudo chgrp -R video /sys/class/backlight/intel_backlight .
-# sudo chmod g+w /sys/class/backglight/intel_backlight/brightness
-# sudo usermod -a -G video jake
+sudo chgrp -R video /sys/class/backlight/intel_backlight .
+sudo chmod g+w /sys/class/backglight/intel_backlight/brightness
+sudo usermod -a -G video jake
 
 sudo pacman -S awesome-terminal-fonts nerd-fonts noto-fonts noto-fonts-emoji otf-monaspace-nerd powerline-fonts
 
-# same as backlight comment above
-# sudo pacman -S alsa-utils pavucontrol pipewire-alsa pipewire-audio pipewire-pulse pipewire-zeroconf wireplumber
-# systemctl enable --now avahi-daemon
+sudo pacman -S alsa-utils pavucontrol pipewire-alsa pipewire-audio pipewire-pulse pipewire-zeroconf wireplumber
+systemctl enable --now avahi-daemon
 
 sudo pacman -S spotify-launcher
 echo "Uncomment the wayland args in the Spotify config..."
