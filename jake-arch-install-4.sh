@@ -4,22 +4,43 @@ sudo pacman -Syu
 sudo pacman -S cmake git-delta jq less libgccjit postgresql ripgrep zsh
 chsh -s `which zsh`
 
-# install 4dots hyprland
-# do this early as it installs a bunch of OS functionality and there is less chance of
-# conflicts if the package landscape is still clean
-bash <(curl -s "https://end-4.github.io/dots-hyprland-wiki/setup.sh")
+sudo pacman -S wget
+ZSH="$HOME/.oh-my-zsh" sh -c "$(wget https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)"
+git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+rm ~/.zshrc # we'll homesick in our own config
 
-yay -R hyprswitch --noconfirm
-mkdir /home/jake/work
-mkdir /home/jake/work/personal
-git clone git@github.com:jakeprime/hyprswitch /home/jake/work/personal/hyprswitch
-cd /home/jake/work/personal/hyprswitch
-cargo b -r
-sudo cp target/release/hyprswitch /usr/bin
-popd
+sudo pacman -S openssh magic-wormhole
+ssh_key = "$(whoami)@$(uname -n)-$(date -I)"
+ssh-keygen -C "$ssh_key"
+echo "About to send ssh public key via a giant hairy wormhole. When it gets to the other end add it to Github."
+read -p "Do it..."
+wormhole send ~/.ssh/id_ed25519.pub
 
-sudo pacman -S fprintd fwupd htop imagemagick isync libnotify nwg-look usbutils wl-clipboard
-yay -S 1password 1password-cli google-chrome gotop light slack-desktop-wayland
+mkdir -p /home/jake/work/personal
+git clone git@github.com:jakeprime/dotfiles -b arch /home/jake/work/personal/dotfiles
+cp /home/jake/work/personal/dotfiles/home/.default-gems /home/jake
+cp /home/jake/work/personal/dotfiles/home/.default-npm-packages /home/jake
+cp /home/jake/work/personal/dotfiles/home/.default-python-packages /home/jake
+
+sudo pacman -S --needed gcc gpg libyaml make
+yay asdf-vm
+# python is a dependency for node, so do it first
+asdf plugin add python
+asdf install python 3.13.2
+asdf install python 2.7.18
+asdf set -u python 3.13.2 2.7.18
+asdf plugin add ruby https://github.com/asdf-vm/asdf-ruby.git
+asdf install ruby 3.4.2
+asdf set -u ruby 3.4.2
+asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git
+asdf install nodejs latest
+asdf set -u nodejs latest
+asdf plugin add yarn
+asdf install yarn latest
+asdf set -u yarn latest
+asdf plugin add golang
+asdf install golang latest
+asdf set -u golang latest
 
 sudo chgrp -R video /sys/class/backlight/intel_backlight .
 sudo chmod g+w /sys/class/backglight/intel_backlight/brightness
@@ -30,36 +51,16 @@ sudo pacman -S awesome-terminal-fonts nerd-fonts noto-fonts noto-fonts-emoji otf
 sudo pacman -S alsa-utils pavucontrol pipewire-alsa pipewire-audio pipewire-pulse pipewire-zeroconf wireplumber
 systemctl enable --now avahi-daemon
 
+sudo pacman -S cliphist foot fuzzel grim hypridle hyprland hyprlock hyprpaper hyprpicker swappy tesseract waybar
+yay anyrun pyprpaper wlogout
+
+sudo pacman -S --needed fprintd fwupd htop imagemagick isync libnotify nwg-look usbutils wl-clipboard
+yay -S 1password 1password-cli google-chrome gotop light slack-desktop-wayland
+
 sudo pacman -S spotify-launcher
 echo "Uncomment the wayland args in the Spotify config..."
 read -p
 sudo vim /etc/spotify-launcher.conf
-
-
-sudo pacman -S openssh magic-wormhole
-ssh_key = "$(whoami)@$(uname -n)-$(date -I)"
-ssh-keygen -C "$ssh_key"
-echo "About to send ssh public key via a giant hairy wormhole. When it gets to the other end add it to Github."
-read -p "Do it..."
-wormhole send ~/.ssh/id_ed25519.pub
-
-sudo pacman -S libyaml python-pip
-yay asdf-vm
-asdf plugin add ruby https://github.com/asdf-vm/asdf-ruby.git
-asdf install ruby latest
-asdf set -u ruby latest
-asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git
-asdf install nodejs latest
-asdf set -u nodejs latest
-asdf plugin add python
-asdf install python latest
-asdf set -u python latest
-pip install build dbus-python hatchling installer PyGObject
-# there must be a better way to do this, all the following were needed to be able to install the aws-cli
-pip install flit-core pep517 python-dateutil distro urllib3 awscrt ruamel.yaml colorama docutils prompt_toolkit cryptography
-
-gem install rails rubocop rubocop-rails ruby-lsp sorbet
-node install --yarn
 
 # need 20.x for heroku-cli
 asdf install nodejs 20.18.3
@@ -67,19 +68,9 @@ ASDF_NODEJS_VERSION=20.18.3 yay heroku-cli
 
 yay aws-cli-v2
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-(echo; echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"') >> /home/jake/.zshrc
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
-yay pyprpaper
-
-sudo pacman -S wget
-ZSH="$HOME/.oh-my-zsh" sh -c "$(wget https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)"
-git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-rm ~/.zshrc # we'll homesick in our own config
-
-gem install homesick
 homesick clone git@github.com:jakeprime/dotfiles arch
-cd ~/.homesick/repos/arch
 homesick link arch
 
 mkdir -p ~/.vim/bundle
@@ -92,7 +83,7 @@ cd /tmp/emacs-moe
 ./configure --with-native-compilation --with-json --with-pgtk
 sudo make install
 git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
-
+popd
 
 sudo pacman -S fuse3 inotify-tools rclone
 read -p "Setup Google Drive sync? (Y/n): " gdrive_sync
@@ -108,7 +99,7 @@ then
     then
         rclone bisync gdrive: /home/jake/gdrive --create-empty-src-dirs --compare size,modtime,checksum --slow-hash-sync-only --resilient -MvP --drive-export-formats link.html --fix-case --resync
         sudo loginctl enable-linger jake
-        sudo ln -s /home/jake/.homesick/repos/dotfiles/scripts/gdrive-sync.sh /usr/local/sbin
+        sudo ln -s /home/jake/.homesick/repos/arch/scripts/gdrive-sync.sh /usr/local/sbin
         gdrive-sync.sh
     fi
 fi
@@ -116,7 +107,7 @@ fi
 sudo pacman -S pass
 read -p "Generating GPG key, default options are fine for all.\nPress any key to continue"
 gpg --full-generate-key
-read -p "Past the long public key from above here: " gpg_key
+read -p "Paste the long public key from above here: " gpg_key
 pass init $gpg_key
 read -p "Get a key from https://github.com/settings/tokens/new\nI've got it..."
 pass insert github/homebrew
@@ -127,6 +118,5 @@ cleo config tunnel port 3064
 
 yay awsvpnclient
 sudo systemctl enable --now awsvpnclient
-
 
 # fin
