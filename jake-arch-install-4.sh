@@ -67,6 +67,20 @@ yay -S anyrun pyprpaper wlogout
 sudo pacman -S --needed fwupd htop isync libnotify nwg-look wl-clipboard
 yay -S 1password 1password-cli google-chrome gotop light slack-desktop-wayland
 
+# webcam stuff
+sudo pacman -S --needed gst-plugin-libcamera pipewire-libcamera libcamera-tools libcamera-ipa libcamera
+yay intel-ivsc-firmware
+# need to manually install the drivers, can't just yay them though
+# as at the time of writing it's been pegged to an old version
+mkdir -p /tmp/ipu6-drivers
+git clone https://aur.archlinux.org/intel-ipu6-dkms-git.git /tmp/ipu6-drivers
+cd /tmp/ipu6-drivers
+sed -i 's/^\(\s*pkgver\s\?=\s\?\)[^ ]*/\1r228.c09e2198d/' PKGBUILD
+sed -i 's/^\(\s*pkgver\s\?=\s\?\)[^ ]*/\1r228.c09e2198d/' .SRCINFO
+makepkg -si
+popd
+rm -rf /tmp/ipu6-drivers
+
 sudo pacman -S spotify-launcher
 echo "Uncomment the wayland args in the Spotify config..."
 read -p
