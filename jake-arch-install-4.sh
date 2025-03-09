@@ -1,6 +1,16 @@
 # do this first to make sure we have up to date mirrors
 sudo pacman -Syu
 
+# there's probably going to be a lot of sudoing, set up fingerprint auth now
+sudo pacman -S --needed fprintd imagemagick usbutils
+fprintd-enroll
+sudo sed -i '2i auth    sufficient   pam_fprintd.so' /etc/pam.d/sudo
+sudo sed -i '2i auth    sufficient   pam_fprintd.so' /etc/pam.d/login
+sudo sed -i '3i auth    sufficient   pam_fprintd.so' /etc/pam.d/su
+sudo sed -i '2i auth    sufficient   pam_fprintd.so' /etc/pam.d/system-local-login
+sudo cp /usr/lib/pam.d/polkit-1 /etc/pam.d
+sudo sed -i '3i auth    sufficient   pam_fprintd.so' /etc/pam.d/polkit-1
+
 sudo pacman -S cmake git-delta jq less libgccjit postgresql ripgrep zsh
 chsh -s `which zsh`
 
@@ -52,9 +62,9 @@ sudo pacman -S alsa-utils pavucontrol pipewire-alsa pipewire-audio pipewire-puls
 systemctl enable --now avahi-daemon
 
 sudo pacman -S cliphist foot fuzzel grim hypridle hyprland hyprlock hyprpaper hyprpicker swappy tesseract waybar
-yay anyrun pyprpaper wlogout
+yay -S anyrun pyprpaper wlogout
 
-sudo pacman -S --needed fprintd fwupd htop imagemagick isync libnotify nwg-look usbutils wl-clipboard
+sudo pacman -S --needed fwupd htop isync libnotify nwg-look wl-clipboard
 yay -S 1password 1password-cli google-chrome gotop light slack-desktop-wayland
 
 sudo pacman -S spotify-launcher
