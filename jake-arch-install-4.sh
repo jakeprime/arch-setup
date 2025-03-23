@@ -109,10 +109,10 @@ mkdir -p ~/.vim/bundle
 git clone git@github.com:VundleVim/Vundle.vim ~/.vim/bundle/Vundle.vim
 
 git clone -b feature/shadow git@github.com:ksqsf/emacsmoe.git /tmp/emacs-moe
-sudo pacman -S libxpm
+sudo pacman -S --needed libxpm tree-sitter
 cd /tmp/emacs-moe
 ./autogen.sh
-./configure --with-native-compilation --with-json --with-pgtk
+./configure --with-native-compilation --with-json --with-pgtk --with-tree-sitter
 sudo make install
 git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
 popd
