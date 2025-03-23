@@ -54,6 +54,12 @@ asdf plugin add golang
 asdf install golang latest
 asdf set -u golang latest
 
+sudo pacman -S --needed qemu-full docker docker-buildx docker-compose
+yay -S colima lima-bin
+# might need to do this before the next line:
+# sudo pacman -S edk2-ovmf
+sudo ln -s /usr/share/OVMF/x64/OVMF_CODE.4m.fd /usr/share/OVMF/OVMF_CODE.fd
+
 sudo chgrp -R video /sys/class/backlight/intel_backlight .
 sudo chmod g+w /sys/class/backglight/intel_backlight/brightness
 sudo usermod -a -G video jake
