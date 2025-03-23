@@ -144,5 +144,6 @@ cleo config tunnel port 3064
 
 yay awsvpnclient
 sudo systemctl enable --now awsvpnclient
+sudo systemctl enable --now systemd-resolved
 
 # fin
