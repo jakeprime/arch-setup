@@ -11,6 +11,8 @@ sudo sed -i '2i auth    sufficient   pam_fprintd.so' /etc/pam.d/system-local-log
 sudo cp /usr/lib/pam.d/polkit-1 /etc/pam.d
 sudo sed -i '3i auth    sufficient   pam_fprintd.so' /etc/pam.d/polkit-1
 
+sudo systemctl enable --now systemd-timesyncd
+
 sudo pacman -S cmake git-delta jq less libgccjit postgresql ripgrep zsh
 chsh -s `which zsh`
 
