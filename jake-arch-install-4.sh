@@ -13,7 +13,7 @@ sudo sed -i '3i auth    sufficient   pam_fprintd.so' /etc/pam.d/polkit-1
 
 sudo systemctl enable --now systemd-timesyncd
 
-sudo pacman -S cmake git-delta jq less libgccjit postgresql ripgrep zsh
+sudo pacman -S cmake git-delta jemalloc jq less libgccjit postgresql ripgrep zsh
 chsh -s `which zsh`
 
 sudo pacman -S wget
