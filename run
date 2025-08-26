@@ -1,0 +1,8 @@
+#!/bin/bash
+
+export WORKING_DIR=/tmp/$(uuidgen)
+
+mkdir $WORKING_DIR
+git clone https://github.com/jakeprime/arch-setup $WORKING_DIR
+
+$WORKING_DIR/install.sh
