@@ -7,7 +7,10 @@ sudo pacman -S --needed --noconfirm \
   foot \
   git-delta \
   google-chrome \
+  isync \
   pass \
   tmux
 
 CC=gcc-14 yay -S --needed --noconfirm \
+  lastpass-cli \
+  mu
