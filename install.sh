@@ -15,6 +15,7 @@ source $WORKING_DIR/scripts/secrets.sh
 
 source $WORKING_DIR/scripts/emacs.sh
 source $WORKING_DIR/scripts/hyprswitch.sh
+source $WORKING_DIR/scripts/printer.sh
 source $WORKING_DIR/scripts/sysadmin.sh
 source $WORKING_DIR/scripts/zsh.sh
 
