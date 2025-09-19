@@ -9,7 +9,8 @@ sudo pacman -S --needed --noconfirm \
   google-chrome \
   isync \
   pass \
-  tmux
+  tmux \
+  wdiff
 
 CC=gcc-14 yay -S --needed --noconfirm \
   lastpass-cli \
