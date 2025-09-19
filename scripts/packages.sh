@@ -6,12 +6,12 @@ sudo pacman -S --needed --noconfirm \
   evtest \
   foot \
   git-delta \
-  google-chrome \
   isync \
   pass \
   tmux \
   wdiff
 
 CC=gcc-14 yay -S --needed --noconfirm \
+  google-chrome \
   lastpass-cli \
   mu

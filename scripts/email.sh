@@ -9,7 +9,7 @@ mu init \
    --maildir=$MAIL_DIR \
    --my-address=jake@jakeprime.com \
    --my-address=jake.prime@gmail.com \
-   --my-address=jake@meetcleo.com \
+   --my-address=jake@meetcleo.com
 mu index
 
 # this is going to take tiiiime, but it can be interrupted and resumed at any
