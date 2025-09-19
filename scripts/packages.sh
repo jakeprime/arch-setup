@@ -7,6 +7,7 @@ sudo pacman -S --needed --noconfirm \
   foot \
   git-delta \
   isync \
+  keychain \
   pass \
   tmux \
   wdiff
