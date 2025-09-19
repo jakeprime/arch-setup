@@ -1,21 +1,24 @@
 #!/bin/bash
 
-sudo pacman -S --needed --noconfirm \
-  libgccjit libxpm tree-sitter
+if [[ -z "$(which emacs)" ]]; then
+  sudo pacman -S --needed --noconfirm \
+    libgccjit libxpm tree-sitter
 
-DIR=/tmp/$(uuidgen)
-mkdir -p $DIR
-pushd $DIR
+  DIR=/tmp/$(uuidgen)
+  mkdir -p $DIR
+  pushd $DIR
 
-git init
-git remote add origin https://github.com/ksqsf/emacsmoe
-git fetch origin feature/shadow --depth=1
-git checkout feature/shadow
+  git init
+  git remote add origin https://github.com/ksqsf/emacsmoe
+  git fetch origin feature/shadow --depth=1
+  git checkout feature/shadow
 
-./autogen.sh
-./configure --with-native-compilation --with-pgtk --with-tree-sitter
-sudo make install -j $(nproc)
+  ./autogen.sh
+  ./configure --with-native-compilation --with-pgtk --with-tree-sitter
+  sudo make install -j $(nproc)
 
-popd
+  popd
 
-git clone https://github.com/syl20bnr/spacemacs $HOME/.emacs.d
+  git clone https://github.com/syl20bnr/spacemacs $HOME/.emacs.d
+  mkdir -p $HOME/.emacs.d/autosaves
+fi
