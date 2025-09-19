@@ -12,8 +12,6 @@ mu init \
    --my-address=jake@meetcleo.com \
 mu index
 
-echo "MU4E_DIR=/usr/share/emacs/site-lisp/mu4e" >> $HOME/.spacemacs.d/.spacemacs.env
-
 # this is going to take tiiiime, but it can be interrupted and resumed at any
 # point, so just kick it off in a fork now
 mbsync --all >/dev/null &
