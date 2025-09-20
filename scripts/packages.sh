@@ -4,7 +4,6 @@ sudo pacman -S --needed --noconfirm \
   bc \
   cliphist \
   evtest \
-  foot \
   git-delta \
   isync \
   keychain \
