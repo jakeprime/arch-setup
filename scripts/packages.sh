@@ -13,6 +13,5 @@ sudo pacman -S --needed --noconfirm \
   wdiff
 
 CC=gcc-14 yay -S --needed --noconfirm \
-  google-chrome \
   lastpass-cli \
   mu
