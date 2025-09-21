@@ -5,6 +5,7 @@ sudo pacman -S --needed --noconfirm \
   cliphist \
   evtest \
   git-delta \
+  intel-media-driver \
   isync \
   keychain \
   pass \
