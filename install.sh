@@ -15,6 +15,7 @@ source $WORKING_DIR/scripts/packages.sh
 
 source $WORKING_DIR/scripts/secrets.sh
 
+source $WORKING_DIR/scripts/audio.sh
 source $WORKING_DIR/scripts/emacs.sh
 source $WORKING_DIR/scripts/fonts.sh
 source $WORKING_DIR/scripts/git.sh
