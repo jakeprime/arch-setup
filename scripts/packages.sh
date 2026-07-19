@@ -3,6 +3,7 @@
 sudo pacman -S --needed --noconfirm \
   bc \
   cliphist \
+  dnsutils \
   evtest \
   git-delta \
   intel-media-driver \
@@ -10,8 +11,10 @@ sudo pacman -S --needed --noconfirm \
   keychain \
   pass \
   tmux \
-  wdiff
+  wdiff \
+  xorg-xeyes
 
 CC=gcc-14 yay -S --needed --noconfirm \
   lastpass-cli \
-  mu
+  mu \
+  vicinae-bin
