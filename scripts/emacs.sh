@@ -9,9 +9,9 @@ if [[ -z "$(which emacs)" ]]; then
   pushd $DIR
 
   git init
-  git remote add origin https://github.com/ksqsf/emacsmoe
-  git fetch origin feature/shadow --depth=1
-  git checkout feature/shadow
+  git remote add origin https://github.com/jakeprime/emacs
+  git fetch origin jakeprime --depth=1
+  git checkout jakeprime
 
   ./autogen.sh
   ./configure --with-native-compilation --with-pgtk --with-tree-sitter
