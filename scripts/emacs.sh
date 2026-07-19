@@ -19,6 +19,9 @@ if [[ -z "$(which emacs)" ]]; then
 
   popd
 
+  git clone --depth 1 https://github.com/doomemacs/doomemacs ~/.config/emacs
+  ~/.config/emacs/bin/doom install
+
   git clone https://github.com/syl20bnr/spacemacs $HOME/.emacs.d
   mkdir -p $HOME/.emacs.d/autosaves
 fi
