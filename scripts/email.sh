@@ -1,9 +1,9 @@
 #!/bin/bash
 
-yay -S --needed --noconfirm cyrus-sasl-xoauth2-git
-mise x python@3 -- pip3 install --user mutt-oauth2
+source "$(dirname "${BASH_SOURCE[0]}")/xdg.sh"
 
-MAIL_DIR=$XDG_DATA_HOME/mail
+yay -S --needed --noconfirm cyrus-sasl-xoauth2-git mu
+mise x python@3 -- pip3 install --user mutt-oauth2
 
 mkdir -p $MAIL_DIR/personal
 mkdir -p $MAIL_DIR/cleo

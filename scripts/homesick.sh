@@ -1,23 +1,35 @@
 #!/bin/bash
 
-if [[ ! -d "$HOME/work/personal/dotfiles" ]]; then
-  MISE_SHIMS=~/.local/share/mise/shims
-  SSH_KEY=id_archibald
+source "$(dirname "${BASH_SOURCE[0]}")/xdg.sh"
 
+mkdir -p /tmp/arch-install
+
+if [[ ! -f "/tmp/arch-install/homesick" ]]; then
   # We'll need ruby to install Homesick, so make sure we have it
   $MISE_SHIMS/ruby -v >/dev/null 2>&1 || mise install ruby && mise use -g ruby
 
-  $MISE_SHIMS/gem install homesick
+  gem install specific_install
+  gem specific_install -l https://github.com/jakeprime/homesick
 
-  eval $(ssh-agent -s)
-  ssh-add $HOME/.ssh/$SSH_KEY
-  $MISE_SHIMS/homesick clone git@github.com:jakeprime/dotfiles arch
-  pushd ~/.homesick/repos/arch && git checkout arch && popd
+  ruby_version="$(ruby -v | awk '{print $2}')"
 
-  $MISE_SHIMS/homesick link arch --force
+  if [[ $(ssh git@github.com 2>&1 | grep denied) ]]; then
+    eval $(ssh-agent -s)
+    ssh-add $HOME/.ssh/id_archibald
+  fi
+
+  homesick clone git@github.com:jakeprime/dotfiles main
+  pushd $HOMESICKDIR/repos/main
+  git checkout quattro
+  popd
+
+  homesick link main --force
+
+  touch /tmp/arch-install/homesick
 
   # finally make sure we're loading it
-  CUSTOM_LOAD="source = ~/.config/hypr/custom/custom.sh"
-  grep "$CUSTOM_LOAD" $HOME/.config/hypr/hyprland.conf >/dev/null ||
-    echo "$CUSTOM_LOAD" >>$HOME/.config/hypr/hyprland.conf
+  #  CUSTOM_LOAD="require(\"~/.config/hypr/custom/custom.lua\")"
+
+  # grep "$CUSTOM_LOAD" $HOME/.config/hypr/hyprland.lua >/dev/null ||
+  #   echo "$CUSTOM_LOAD" >>$HOME/.config/hypr/hyprland.lua
 fi

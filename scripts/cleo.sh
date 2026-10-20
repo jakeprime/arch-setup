@@ -1,5 +1,7 @@
 #!/bin/bash
 
+source "$(dirname "${BASH_SOURCE[0]}")/xdg.sh"
+
 sudo pacman -S --needed --noconfirm \
   1password-beta \
   1password-cli \
@@ -9,21 +11,19 @@ yay -S --needed --noconfirm \
   android-tools \
   android-sdk \
   android-studio \
-  awsvpnclient \
-  heroku-cli
+  awsvpnclient
+
+export PATH="$PATH:/home/linuxbrew/.linuxbrew/bin"
+if [[ -z "$(which brew)" ]]; then
+  NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+fi
 
 if [[ -z "$HOMEBREW_GITHUB_API_TOKEN" ]]; then
-  echo "We need to set a Github access token to get access to the Cleo CLI."
-  echo "If you don't already have one create one now:"
-  echo "  https://github.com/settings/tokens/new?scopes=repo&description=Homebrew%20token"
-  echo ""
-  read -p $'Enter your github token:\n' TOKEN
-  export HOMEBREW_GITHUB_API_TOKEN=$TOKEN
-  echo "export HOMEBREW_GITHUB_API_TOKEN=$TOKEN" >>$HOME/.zshrc
+  export HOMEBREW_GITHUB_API_TOKEN="$(pass github/homebrew 2>/dev/null)"
 fi
 
 brew tap meetcleo/cleo
-brew install meetcleo/cleo/cleo
+brew install --yes meetcleo/cleo/cleo
 cleo config tunnel port 3064
 # maybe later we can get the port automatically, we can load the file with:
 # gh api repos/meetcleo/ansible-nginx-devproxy/contents/onboard_engineer/vars/main.yml --jq '.content' | base64 -d
@@ -59,8 +59,6 @@ fi
 
 pushd $CLEO_DIR/meetcleo
 git pull
-mise plugin i yarn >/dev/null 2>&1
-mise install
 bundle config set gems.contribsys.com $(op read "op://Tech/663renc3kvn5rgtb2zs6nmngpe/username"):$(op read "op://Tech/663renc3kvn5rgtb2zs6nmngpe/password")
 echo "$(op read op://Tech/afbvozval6hukgqkbe2gqv62sm/env.development.local)" >.env.development.local
 docker compose --profile deps create
@@ -78,19 +76,18 @@ git pull
 mise install
 popd
 
-if ! cat $HOME/.aws/config | grep "\[profile Engineer-878877078763\]"; then
-  mkdir -p $HOME/.aws
+if ! cat $AWS_CONFIG_FILE 2>/dev/null | grep "\[profile Engineer-878877078763\]"; then
   echo "[profile Engineer-878877078763]
 sso_start_url = https://meetcleo.awsapps.com/start/#
 sso_region = us-east-1
 sso_account_id = 878877078763
 sso_role_name = Engineer
 region = us-east-1
-" >>$HOME/.aws/config
+" >>$AWS_CONFIG_FILE
 fi
 
 if [[ -z "$(echo $AWS_DEFAULT_PROFILE)" ]]; then
-  echo "export AWS_DEFAULT_PROFILE=Engineer-878877078763" >>$HOME/.zshrc
+  export AWS_DEFAULT_PROFILE="Engineer-878877078763"
 fi
 
 echo "Authenticating with AWS..."
@@ -114,10 +111,6 @@ sudo ln -rsf /run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
 VPN_FILE=$HOME/.config/AWSVPNClient/OpenVpnConfigs/Cleo
 echo "dhcp-option DOMAIN-ROUTE .
 $(cat $VPN_FILE)" >$VPN_FILE
-
-echo "$(lpass show "Cleo SSH" --field="Public Key")" >$HOME/.ssh/id_cleo.pub
-echo "$(lpass show "Cleo SSH" --field="Private Key")" >$HOME/.ssh/id_cleo
-chmod 0600 ~/.ssh/id_cleo
 
 if ! grep cleo_development_proxy $HOME/.ssh/config >/dev/null 2>&1; then
   echo "Host cleo_development_proxy

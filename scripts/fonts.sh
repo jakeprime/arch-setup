@@ -1,5 +1,10 @@
 #!/bin/bash
 
+source "$(dirname "${BASH_SOURCE[0]}")/xdg.sh"
+
+# Omarchy insalls mono-nerd-basic which conflicts with the non-basic version installed below
+sudo pacman -Rdd --noconfirm ttf-jetbrains-mono-nerd-basic
+
 sudo pacman -S --needed --noconfirm \
      awesome-terminal-fonts \
      fontconfig \

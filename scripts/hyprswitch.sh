@@ -1,15 +1,18 @@
 #!/bin/bash
 
-if [[ -z "$(which hyprswitch)" ]]; then
-  MISE_SHIMS=$HOME/.local/share/mise/shims
+source "$(dirname "${BASH_SOURCE[0]}")/xdg.sh"
 
+if [[ -z "$(which hyprswitch)" ]]; then
   $MISE_SHIMS/cargo -v >/dev/null 2>&1 || mise install rust && mise use -g rust
 
-  mkdir -p $HOME/work/personal/hyprswitch
-  pushd $HOME/work/personal/hyprswitch
+  DIR=/tmp/$(uuidgen)
+  mkdir -p $DIR
+  pushd $DIR
 
-  eval $(ssh-agent -s)
-  ssh-add $HOME/.ssh/id_archibald
+  if [[ $(ssh git@github.com 2>&1 | grep denied) ]]; then
+    eval $(ssh-agent -s)
+    ssh-add $HOME/.ssh/id_archibald
+  fi
 
   git clone git@github.com:jakeprime/hyprswitch .
   git checkout jake
